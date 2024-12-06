@@ -1,5 +1,5 @@
 import { User } from "../models/user.interface";
-import { UserGenerator } from "./usergenerator.service";
+import { UserGenerator } from "../generator-services/usergenerator.service";
 
 export class UserService {
     private users: User[] = [];
@@ -17,6 +17,21 @@ export class UserService {
     }
 
     getUsersByCity(city: string): User[]{
-        return this.users.filter(user => user.address.city === city.toLowerCase());
+        if(!city) return [];
+
+    const filteredUsers = this.users.filter(user => 
+            user.address.city.toLowerCase().includes(city.toLowerCase())
+        );
+        if(filteredUsers.length > 0)
+        {
+        
+        filteredUsers.slice(0,5).forEach(user => {
+                console.log(`${user.address.city}`);
+            })
+            
+        }
+        
+        
+        return filteredUsers;
     }
 }

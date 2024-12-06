@@ -26,17 +26,16 @@ describe('User Service', () => {
         const users = userService.getAllUsers();
         expect(users.length).toEqual(20); 
     });
-
-    // it('should fetch users by city', () => {
-    //     const allUsers = userService.getAllUsers();
-    //     const specificCity = allUsers[0].address.city.toLowerCase();
-    //     const usersByCity = userService.getUsersByCity(specificCity);
+    it('should fetch users by city', () => {
+        const allUsers = userService.getAllUsers();
+        const specificCity = allUsers[0].address.city.toLowerCase();
+        const usersByCity = userService.getUsersByCity(specificCity);
     
-    //     expect(usersByCity.length).toBeGreaterThan(0);
-    //     usersByCity.forEach(user => {
-    //         expect(user.address.city).toEqual(specificCity);
-    //     });
-    // });
+        expect(usersByCity.length).toBeGreaterThan(0);
+        usersByCity.forEach(user => {
+            expect(user.address.city.toLowerCase()).toEqual(specificCity);
+        });
+    });
     
     
     it('should return an empty array when no users are found in the specified city', () => {

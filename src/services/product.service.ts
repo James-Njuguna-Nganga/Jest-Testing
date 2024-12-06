@@ -1,5 +1,5 @@
 import { Product } from "../models/product.interface";
-import { ProductGenerator } from "./productgenerator.service";
+import { ProductGenerator } from "../generator-services/productgenerator.service";
 
 export class ProductService {
     private products: Product[] = [];
