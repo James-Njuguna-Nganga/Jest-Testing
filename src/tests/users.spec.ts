@@ -10,16 +10,31 @@ describe('User Service', () => {
 
     it('should generate 20 users', () => {
         const users = userService.getAllUsers();
-        expect(users.length).toEqual(20);
-    })
-
+        expect(users.length).toMatchInlineSnapshot(`20`);
+    });
+    
     it('should fetch a user by ID', () => {
         const allUsers = userService.getAllUsers();
         const userId = allUsers[1].id; 
         const user = userService.getUser(userId);
     
-        expect(user).toBeDefined();
-        expect(user?.id).toEqual(userId);
+        expect(user).toMatchInlineSnapshot(`
+{
+  "address": {
+    "city": "New Ashleeboro",
+    "country": "Cote d'Ivoire",
+    "street": "107 Kuhic Garden",
+    "zipCode": "85379-0969",
+  },
+  "avatar": "https://avatars.githubusercontent.com/u/20557100",
+  "email": "Jacques_Watsica@gmail.com",
+  "firstName": "Kali",
+  "id": "b726d2eb-8c21-413a-841b-f50e0e3f20bd",
+  "jobTitle": "Human Research Technician",
+  "lastName": "Beatty-Roberts",
+  "phoneNumber": "(301) 640-9864 x59137",
+}
+`);
     });
 
     it('should return all users', () => {

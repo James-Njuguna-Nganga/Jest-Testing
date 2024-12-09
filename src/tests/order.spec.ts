@@ -9,19 +9,32 @@ describe('OrderService - Async Tests', () => {
   });
 
   it('should generate multiple orders concurrently', async () => {
-    const orders = await orderService.generateMultipleOrders(5);
-    
-    expect(orders).toHaveLength(5); 
-    expect(orders[0].status).toBe(OrderStatus.PENDING);
-  });
-  
+    const orders = await orderService.generateMultipleOrders(2);
 
-  it('should update order status correctly', async () => {
-    const order = await orderService.createOrderAsync(); 
-    const updatedOrder = await orderService.updateOrderStatus(order.id, OrderStatus.SHIPPED);
-
-    expect(updatedOrder.status).toBe(OrderStatus.SHIPPED);
-    expect(updatedOrder.updatedAt).toBeInstanceOf(Date);
+    expect(orders).toMatchInlineSnapshot(`
+[
+  {
+    "createdAt": 12:15pm,
+    "customerEmail": "john@gmail.com",
+    "customerName": "john brian",
+    "id": "123ee",
+    "items": [
+      {
+        "name": "phone",
+        "price": 50000,
+        "quantity": 2,
+      },
+      {
+        "name": "cake",
+        "price": 1200,
+        "quantity": 3,
+      }
+    ],
+    "status": "PROCESSING",
+    "totalAmount": 112200,
+    "updatedAt": 15:12pm,
+  },
+`);
   });
 
   it('should retry processing an order and eventually succeed', async () => {

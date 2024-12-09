@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`complex object snapshot 1`] = `
+{
+  "address": {
+    "street": Any<String>,
+  },
+  "age": Any<Number>,
+  "name": "jimmy",
+}
+`;

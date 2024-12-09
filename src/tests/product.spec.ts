@@ -10,16 +10,21 @@ describe('Product Service', () => {
 
     it('should generate 20 products', () => {
         const products = productService.getAllProducts();
-        expect(products.length).toEqual(20);
+        expect(products.length).toMatchInlineSnapshot(`20`);
     });
-
+    
     it('should fetch a product by id', () => {
         const product = productService.getAllProducts()[0];
         const fetchedProduct = productService.getProduct(product.id);
-        expect(fetchedProduct).toBeDefined();
-        expect(fetchedProduct?.id).toEqual(product.id);
+        expect(fetchedProduct).toMatchInlineSnapshot(`{
+  "category": "electronics",
+  "description": "high performance quality",
+  "id": "123",
+  "name": "woofer",
+  "price": 12000,
+}
+`);
     });
-
     it('should fetch products by category', () => {
         const products = productService.getAllProducts();
         const category = products[0].category;
@@ -33,6 +38,6 @@ describe('Product Service', () => {
 
     it('should return an empty array when no products are found in the specified category', () => {
         const productsByCategory = productService.getProductsByCategory('non-existent-category');
-        expect(productsByCategory).toEqual([]);
+        expect(productsByCategory).toMatchInlineSnapshot(`[]`);
     });
 });
